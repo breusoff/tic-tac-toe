@@ -1,0 +1,47 @@
+{
+    "extends": [
+        "airbnb-typescript-prettier"
+    ],
+    "plugins": [
+        "only-warn"
+    ],
+    "rules": {
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "interface",
+                "format": [
+                    "PascalCase"
+                ],
+                "custom": {
+                    "regex": "^I[A-Z]",
+                    "match": true
+                }
+            }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": 0,
+        "import/prefer-default-export": 0,
+        "no-console": ["warn", { "allow": ["warn", "error", "info"]}],
+        "no-unused-expressions": ["error", {"allowShortCircuit": true}]
+    },
+    "ignorePatterns": [
+        "*.test.js",
+        "setupTests.ts",
+        "react-app-env.d.ts"
+    ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ],
+                "paths": [
+                    "."
+                ]
+            }
+        }
+    }
+}

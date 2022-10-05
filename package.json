@@ -10,7 +10,12 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test"
+        "test": "react-scripts test",
+        "release-major": "standard-version --release-as major",
+        "release-minor": "standard-version --release-as minor",
+        "release-patch": "standard-version --release-as patch",
+        "prettier": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,scss}'",
+        "prepare": "husky install"
     },
     "dependencies": {
         "react": "18.2.0",
@@ -25,7 +30,38 @@
         "@types/jest": "27.5.2",
         "@types/node": "16.11.64",
         "@types/react": "18.0.21",
-        "@types/react-dom": "18.0.6"
+        "@types/react-dom": "18.0.6",
+        "@commitlint/cli": "16.2.3",
+        "@commitlint/config-conventional": "16.2.1",
+        "@trivago/prettier-plugin-sort-imports": "3.3.0",
+        "create-react-component-folder": "0.3.7",
+        "eslint": "7.32.0",
+        "eslint-config-airbnb-typescript-prettier": "4.2.0",
+        "eslint-plugin-only-warn": "1.0.2",
+        "husky": "7.0.4",
+        "lint-staged": "12.1.4",
+        "prettier": "2.5.1",
+        "standard-version": "9.3.2"
+    },
+    "crcf": [
+        "stylesext",
+        "notest",
+        "typescript",
+        "uppercase",
+        "functional",
+        {
+            "output": "src/components"
+        }
+    ],
+    "lint-staged": {
+        "src/**/*.(js|jsx|ts|tsx|css|scss)": [
+            "prettier --write"
+        ]
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
     },
     "browserslist": {
         "production": [

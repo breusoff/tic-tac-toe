@@ -21,7 +21,7 @@ const global = css`
     }
 
     body {
-        font-size: 1.6rem;
+        font-size: 2.4rem;
 
         background-color: ${(props) => props.theme.bg};
         color: ${(props) => props.theme.color};
@@ -30,6 +30,11 @@ const global = css`
     body,
     #root {
         min-height: 100vh;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
     }
 
     * {

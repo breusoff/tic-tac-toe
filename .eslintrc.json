@@ -1,18 +1,12 @@
 {
-    "extends": [
-        "airbnb-typescript-prettier"
-    ],
-    "plugins": [
-        "only-warn"
-    ],
+    "extends": ["airbnb-typescript-prettier"],
+    "plugins": ["only-warn"],
     "rules": {
         "@typescript-eslint/naming-convention": [
             "error",
             {
                 "selector": "interface",
-                "format": [
-                    "PascalCase"
-                ],
+                "format": ["PascalCase"],
                 "custom": {
                     "regex": "^I[A-Z]",
                     "match": true
@@ -21,26 +15,17 @@
         ],
         "@typescript-eslint/explicit-module-boundary-types": 0,
         "import/prefer-default-export": 0,
-        "no-console": ["warn", { "allow": ["warn", "error", "info"]}],
+        "react/jsx-no-bind": 0,
+        "react/require-default-props": 0,
+        "no-console": ["warn", {"allow": ["warn", "error", "info"]}],
         "no-unused-expressions": ["error", {"allowShortCircuit": true}]
     },
-    "ignorePatterns": [
-        "*.test.js",
-        "setupTests.ts",
-        "react-app-env.d.ts"
-    ],
+    "ignorePatterns": ["*.test.js", "setupTests.ts", "react-app-env.d.ts"],
     "settings": {
         "import/resolver": {
             "node": {
-                "extensions": [
-                    ".js",
-                    ".jsx",
-                    ".ts",
-                    ".tsx"
-                ],
-                "paths": [
-                    "."
-                ]
+                "extensions": [".js", ".jsx", ".ts", ".tsx"],
+                "paths": ["."]
             }
         }
     }

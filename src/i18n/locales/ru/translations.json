@@ -1,5 +1,11 @@
 {
     "translations": {
+        "main": {
+            "title": "Tic-Tac-Toe"
+        },
+        "settings": {
+            "title": "Настройки"
+        },
         "github": "BREUSOFF"
     }
 }

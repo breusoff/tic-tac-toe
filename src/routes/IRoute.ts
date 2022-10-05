@@ -6,11 +6,7 @@ export interface IRoute {
      */
     url: (param?: string | number) => string;
     /**
-     * Заголовок страницы
-     */
-    title?: string;
-    /**
      * Страница, которая рендерится
      */
-    page?: ReactNode;
+    page: ReactNode;
 }

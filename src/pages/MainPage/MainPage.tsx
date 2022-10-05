@@ -1,14 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 import GitHub from "src/components/GitHub";
+import Header from "src/components/Header";
 import Page from "src/components/Page";
-import routes from "src/routes";
 
 const MainPage = () => {
+    const {t} = useTranslation();
+
     return (
         <Page>
-            MainPage
-            <Link to={routes.settings.url()}>settings</Link>
+            <Header title={t("main.title")} settingsButton />
             <GitHub />
         </Page>
     );

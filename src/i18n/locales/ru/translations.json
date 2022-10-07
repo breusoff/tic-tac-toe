@@ -1,10 +1,24 @@
 {
     "translations": {
         "main": {
-            "title": "Tic-Tac-Toe"
+            "title": "Tic-Tac-Toe",
+            "menu": {
+                "playWithBot": "Играть с ботом",
+                "playWithFriend": "Играть с другом"
+            }
         },
         "settings": {
-            "title": "Настройки"
+            "title": "Настройки",
+            "theme": {
+                "title": "Тема",
+                "themes": {
+                    "dark": "Темная",
+                    "light": "Светлая"
+                }
+            },
+            "language": "Язык",
+            "animationDuration": "Продолжительность анимации",
+            "botComplexity": "Сложность бота"
         },
         "github": "BREUSOFF"
     }

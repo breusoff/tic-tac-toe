@@ -22,13 +22,13 @@ export const themes: Record<ThemesNames, DefaultTheme> = {
         color: "#292929",
         cell: "#D2D2D2",
         cellX: "#FFA31A",
-        cellO: "#CE4040",
+        cellO: "#3183FF",
     },
     [ThemesNames.dark]: {
         bg: "#1B1B1B",
         color: "#F2F2F2",
         cell: "#292929",
         cellX: "#FFA31A",
-        cellO: "#CE4040",
+        cellO: "#3183FF",
     },
 };

@@ -8,7 +8,15 @@
             }
         },
         "settings": {
-            "title": "Настройки"
+            "title": "Настройки",
+            "theme": {
+                "title": "Тема",
+                "dark": "Темная",
+                "light": "Светлая"
+            },
+            "language": "Язык",
+            "animationDuration": "Продолжительность анимации",
+            "botComplexity": "Сложность бота"
         },
         "github": "BREUSOFF"
     }

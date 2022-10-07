@@ -23,7 +23,7 @@ export const MainPageLinks = styled.div`
 `;
 
 export const MainPageLink = styled(Link)<{$primary?: boolean}>`
-    border-radius: 1.2rem;
+    border-radius: 1.6rem;
 
     width: 100%;
     height: 6.4rem;

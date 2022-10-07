@@ -16,11 +16,7 @@ const Game = () => {
             {state.map((raw, rawIndex) => (
                 <GameRaw key={rawIndex}>
                     {raw.map((cell, cellIndex) => (
-                        <GameCell
-                            key={cellIndex}
-                            cell={cell}
-                            win={cellIndex === 0}
-                        />
+                        <GameCell key={cellIndex} cell={cell} />
                     ))}
                 </GameRaw>
             ))}

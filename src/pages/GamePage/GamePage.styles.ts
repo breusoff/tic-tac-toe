@@ -8,11 +8,11 @@ export const GamePageContent = styled.div`
     flex-grow: 1;
 
     margin-bottom: 1.6rem;
-    margin-top: 6.4rem;
+    margin-top: 3.2rem;
 
     ${StepWrapper} {
         margin-top: 3.2rem;
-        margin-bottom: 6.4rem;
+        margin-bottom: 3.2rem;
         align-self: center;
     }
 `;

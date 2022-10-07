@@ -21,10 +21,10 @@ const MainPage = () => {
                 <Step />
                 <Links>
                     <Link to={routes.game.url()} $primary>
-                        {t("main.menu.playWithBot")}
+                        {t("main.menu.playWithFriend")}
                     </Link>
                     <Link to={routes.game.url()}>
-                        {t("main.menu.playWithFriend")}
+                        {t("main.menu.playWithBot")}
                     </Link>
                 </Links>
                 <GitHub />

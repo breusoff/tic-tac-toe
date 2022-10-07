@@ -11,8 +11,10 @@
             "title": "Настройки",
             "theme": {
                 "title": "Тема",
-                "dark": "Темная",
-                "light": "Светлая"
+                "themes": {
+                    "dark": "Темная",
+                    "light": "Светлая"
+                }
             },
             "language": "Язык",
             "animationDuration": "Продолжительность анимации",

@@ -11,8 +11,10 @@
             "title": "Settings",
             "theme": {
                 "title": "Theme",
-                "dark": "Dark",
-                "light": "Light"
+                "themes": {
+                    "dark": "Dark",
+                    "light": "Light"
+                }
             },
             "language": "Language",
             "animationDuration": "Animation Duration",

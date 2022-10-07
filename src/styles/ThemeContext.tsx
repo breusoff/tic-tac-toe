@@ -37,8 +37,13 @@ export const ThemeProvider: FC<PropsWithChildren> = ({children}) => {
 
     const [themeName, setThemeName] = useState(() => getSavedThemeName());
 
+    const changeTheme = (theme: ThemesNames) => {
+        localStorage.setItem(storageThemeName, theme);
+        setThemeName(theme);
+    };
+
     return (
-        <ThemeContext.Provider value={{themeName, setThemeName}}>
+        <ThemeContext.Provider value={{themeName, setThemeName: changeTheme}}>
             <StyledThemeProvider theme={themes[themeName] || themes.dark}>
                 {children}
             </StyledThemeProvider>

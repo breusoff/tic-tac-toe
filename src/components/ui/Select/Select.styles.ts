@@ -11,6 +11,7 @@ export const SelectWrapper = styled(FormItem)`
         background-color: ${(props) => props.theme.bg};
         border-radius: 1.2rem;
         box-shadow: none !important;
+        transition: none;
     }
 
     .react-select__placeholder,

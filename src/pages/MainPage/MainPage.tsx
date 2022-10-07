@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import GitHub from "src/components/GitHub";
 import Header from "src/components/Header";
 import Page from "src/components/Page";
 import Step from "src/components/Step";
+import {DEFAULT_STEP, IGameStep} from "src/interfaces/IGameStep";
 import routes from "src/routes";
 import {
     MainPageContent as Content,
@@ -13,12 +14,13 @@ import {
 
 const MainPage = () => {
     const {t} = useTranslation();
+    const [step, setStep] = useState<IGameStep>(DEFAULT_STEP);
 
     return (
         <Page>
             <Header title={t("main.title")} settingsButton />
             <Content>
-                <Step />
+                <Step step={step} onClick={setStep} />
                 <Links>
                     <Link to={routes.game.url()} $primary>
                         {t("main.menu.playWithFriend")}

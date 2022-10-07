@@ -1,7 +1,11 @@
 {
     "translations": {
         "main": {
-            "title": "Tic-Tac-Toe"
+            "title": "Tic-Tac-Toe",
+            "menu": {
+                "playWithBot": "play with bot",
+                "playWithFriend": "play with friend"
+            }
         },
         "settings": {
             "title": "Settings"

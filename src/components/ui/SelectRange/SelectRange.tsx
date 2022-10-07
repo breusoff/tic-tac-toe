@@ -1,18 +1,19 @@
 import React, {FC, ReactNode} from "react";
 import {SelectRangeWrapper as Wrapper} from "./SelectRange.styles";
 import SelectRangeSlider from "./SelectRangeSlider";
+import {ISelectRangeSlider} from "./SelectRangeSlider/ISelectRangeSlider";
 
 interface ISelectRangeProps {
     minIcon?: ReactNode;
     maxIcon?: ReactNode;
-    steps?: number;
+    rangeProps?: ISelectRangeSlider;
 }
 
-const SelectRange: FC<ISelectRangeProps> = ({minIcon, maxIcon, steps}) => {
+const SelectRange: FC<ISelectRangeProps> = ({minIcon, maxIcon, rangeProps}) => {
     return (
         <Wrapper>
             <div>{minIcon}</div>
-            <SelectRangeSlider steps={steps} />
+            <SelectRangeSlider {...rangeProps} />
             <div>{maxIcon}</div>
         </Wrapper>
     );

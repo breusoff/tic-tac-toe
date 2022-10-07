@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, {FC, useMemo, useState} from "react";
 import {Range} from "react-range";
+import {ISelectRangeSlider} from "./ISelectRangeSlider";
 import {
     SelectMark,
     SelectThumb,
@@ -8,24 +9,29 @@ import {
     SelectTrackWrapper,
 } from "./SelectRangeSlider.styles";
 
-const MIN = 0;
-const MAX = 100;
+const SelectRangeSlider: FC<ISelectRangeSlider> = ({
+    steps = 1,
+    value = 0,
+    onChange,
+    min = 0,
+    max = 100,
+}) => {
+    const [values, setValues] = useState<number[]>([value]);
+    const step = useMemo(() => max / steps, [steps]);
 
-interface ISelectRangeSlider {
-    steps?: number;
-}
-
-const SelectRangeSlider: FC<ISelectRangeSlider> = ({steps = 1}) => {
-    const [values, setValues] = useState<number[]>([0]);
-    const step = useMemo(() => MAX / steps, [steps]);
+    function onChangeHandler(newValues: number[]) {
+        setValues(newValues);
+        onChange && onChange(newValues[0]);
+    }
 
     return (
         <Range
             values={values}
             step={step}
-            min={MIN}
-            max={MAX}
+            min={min}
+            max={max}
             onChange={setValues}
+            onFinalChange={onChangeHandler}
             renderMark={({props}) => <SelectMark {...props} />}
             renderTrack={({props, children}) => (
                 <SelectTrackWrapper

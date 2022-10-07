@@ -10,7 +10,11 @@ const SettingsAnimationDuration = () => {
 
     return (
         <Card title={t("settings.animationDuration")}>
-            <SelectRange minIcon={<TurtleIcon />} maxIcon={<RabbitIcon />} />
+            <SelectRange
+                minIcon={<TurtleIcon />}
+                maxIcon={<RabbitIcon />}
+                steps={6}
+            />
         </Card>
     );
 };

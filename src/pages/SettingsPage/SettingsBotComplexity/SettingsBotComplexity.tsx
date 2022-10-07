@@ -10,7 +10,11 @@ const SettingsBotComplexity = () => {
 
     return (
         <Card title={t("settings.botComplexity")}>
-            <SelectRange minIcon={<BabyIcon />} maxIcon={<BotIcon />} />
+            <SelectRange
+                minIcon={<BabyIcon />}
+                maxIcon={<BotIcon />}
+                steps={3}
+            />
         </Card>
     );
 };

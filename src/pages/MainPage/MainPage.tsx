@@ -4,8 +4,8 @@ import GitHub from "src/components/GitHub";
 import Header from "src/components/Header";
 import Page from "src/components/Page";
 import Step from "src/components/Step";
-import {GameStep} from "src/interfaces/GameStep";
 import routes from "src/routes";
+import {GameStep} from "src/types/GameStep";
 import {
     MainPageContent as Content,
     MainPageLink as Link,

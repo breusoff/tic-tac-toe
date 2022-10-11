@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import OIcon from "src/assets/icons/OIcon";
 import XIcon from "src/assets/icons/XIcon";
 import StepButton from "src/components/Step/StepButton";
-import {GameStep} from "src/interfaces/GameStep";
+import {GameStep} from "src/types/GameStep";
 import {StepWrapper} from "./Step.styles";
 
 interface IStepProps {

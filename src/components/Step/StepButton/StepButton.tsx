@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren} from "react";
-import {GameStep} from "src/interfaces/GameStep";
+import {GameStep} from "src/types/GameStep";
 import {StepIcon} from "../Step.styles";
 
 interface IStepButtonProps {

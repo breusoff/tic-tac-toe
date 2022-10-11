@@ -1,13 +1,13 @@
 import React, {FC} from "react";
 import OIcon from "src/assets/icons/OIcon";
 import XIcon from "src/assets/icons/XIcon";
-import {GameStep} from "src/interfaces/GameStep";
-import {IGameCellState} from "src/interfaces/IGameCellState";
 import {EmptyCallback} from "src/types/EmptyCallback";
+import {GameCellState} from "src/types/GameCellState";
+import {GameStep} from "src/types/GameStep";
 import {GameCellO, GameCellWrapper, GameCellX} from "./GameCell.styles";
 
 interface IGameCellProps {
-    cell?: IGameCellState;
+    cell?: GameCellState;
     win?: boolean;
     onClick?: EmptyCallback;
 }

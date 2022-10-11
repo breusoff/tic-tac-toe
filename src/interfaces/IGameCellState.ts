@@ -1,1 +1,3 @@
-export type IGameCellState = null | "x" | "o";
+import {GameStep} from "src/interfaces/GameStep";
+
+export type IGameCellState = null | GameStep;

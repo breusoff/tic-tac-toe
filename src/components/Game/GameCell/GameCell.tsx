@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import OIcon from "src/assets/icons/OIcon";
 import XIcon from "src/assets/icons/XIcon";
+import {GameStep} from "src/interfaces/GameStep";
 import {IGameCellState} from "src/interfaces/IGameCellState";
 import {EmptyCallback} from "src/types/EmptyCallback";
 import {GameCellO, GameCellWrapper, GameCellX} from "./GameCell.styles";
@@ -16,7 +17,7 @@ const GameCell: FC<IGameCellProps> = ({cell, win, onClick}) => {
         return <GameCellWrapper onClick={onClick} />;
     }
 
-    if (cell === "x") {
+    if (cell === GameStep.x) {
         return (
             <GameCellX win={win}>
                 <XIcon />

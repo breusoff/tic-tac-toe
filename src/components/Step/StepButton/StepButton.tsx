@@ -1,15 +1,15 @@
 import React, {FC, PropsWithChildren} from "react";
-import {IGameStep} from "src/interfaces/IGameStep";
+import {GameStep} from "src/interfaces/GameStep";
 import {StepIcon} from "../Step.styles";
 
 interface IStepButtonProps {
-    step?: IGameStep;
-    value: IGameStep;
-    onClick?: (value: IGameStep) => void;
+    step?: GameStep;
+    value: GameStep;
+    onClick?: (value: GameStep) => void;
 }
 
 const StepButton: FC<PropsWithChildren<IStepButtonProps>> = ({
-    step = "x",
+    step = GameStep.x,
     value,
     onClick,
     children,

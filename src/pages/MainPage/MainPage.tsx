@@ -4,7 +4,7 @@ import GitHub from "src/components/GitHub";
 import Header from "src/components/Header";
 import Page from "src/components/Page";
 import Step from "src/components/Step";
-import {DEFAULT_STEP, IGameStep} from "src/interfaces/IGameStep";
+import {GameStep} from "src/interfaces/GameStep";
 import routes from "src/routes";
 import {
     MainPageContent as Content,
@@ -14,7 +14,7 @@ import {
 
 const MainPage = () => {
     const {t} = useTranslation();
-    const [step, setStep] = useState<IGameStep>(DEFAULT_STEP);
+    const [step, setStep] = useState<GameStep>(GameStep.x);
 
     return (
         <Page>

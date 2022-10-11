@@ -2,21 +2,21 @@ import React, {FC} from "react";
 import OIcon from "src/assets/icons/OIcon";
 import XIcon from "src/assets/icons/XIcon";
 import StepButton from "src/components/Step/StepButton";
-import {DEFAULT_STEP, IGameStep} from "src/interfaces/IGameStep";
+import {GameStep} from "src/interfaces/GameStep";
 import {StepWrapper} from "./Step.styles";
 
 interface IStepProps {
-    step?: IGameStep;
-    onClick?: (step: IGameStep) => void;
+    step?: GameStep;
+    onClick?: (step: GameStep) => void;
 }
 
-const Step: FC<IStepProps> = ({step = DEFAULT_STEP, onClick}) => {
+const Step: FC<IStepProps> = ({step = GameStep.x, onClick}) => {
     return (
         <StepWrapper>
-            <StepButton value="x" onClick={onClick} step={step}>
+            <StepButton value={GameStep.x} onClick={onClick} step={step}>
                 <XIcon />
             </StepButton>
-            <StepButton value="o" onClick={onClick} step={step}>
+            <StepButton value={GameStep.o} onClick={onClick} step={step}>
                 <OIcon />
             </StepButton>
         </StepWrapper>

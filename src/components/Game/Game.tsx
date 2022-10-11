@@ -2,8 +2,8 @@
 import React, {useState} from "react";
 import GameCell from "src/components/Game/GameCell";
 import Step from "src/components/Step";
+import {GameStep} from "src/interfaces/GameStep";
 import {IGameCellState} from "src/interfaces/IGameCellState";
-import {IGameStep} from "src/interfaces/IGameStep";
 import {GameGrid, GameRaw, GameWrapper} from "./Game.styles";
 
 const defaultState: IGameCellState[][] = [
@@ -14,10 +14,12 @@ const defaultState: IGameCellState[][] = [
 
 const Game = () => {
     const [state, setState] = useState<IGameCellState[][]>(defaultState);
-    const [step, setStep] = useState<IGameStep>("x");
+    const [step, setStep] = useState<GameStep>(GameStep.x);
 
     function toggleStep() {
-        setStep((prevState) => (prevState === "x" ? "o" : "x"));
+        setStep((prevState) =>
+            prevState === GameStep.x ? GameStep.o : GameStep.x,
+        );
     }
 
     function onCellClick(rawIndex: number, cellIndex: number) {

@@ -1,11 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import React, {useEffect, useState} from "react";
+import React, {useMemo, useState} from "react";
 import GameCell from "src/components/Game/GameCell";
 import Step from "src/components/Step";
 import detectWinCombination from "src/lib/detectWinCombination";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
-import {GameWinner} from "src/types/GameWinner";
 import {GameGrid, GameRaw, GameWrapper} from "./Game.styles";
 
 const defaultState: GameState = [
@@ -17,7 +16,11 @@ const defaultState: GameState = [
 const Game = () => {
     const [state, setState] = useState<GameState>(defaultState);
     const [step, setStep] = useState<GameStep>(GameStep.x);
-    const [winner, setWinner] = useState<GameWinner>(null);
+
+    const {winner, combination} = useMemo(
+        () => detectWinCombination(state),
+        [state],
+    );
 
     function toggleStep() {
         setStep((prevState) =>
@@ -33,12 +36,6 @@ const Game = () => {
         toggleStep();
     }
 
-    useEffect(() => {
-        setWinner(detectWinCombination(state));
-    }, [state]);
-
-    console.log("winner", winner);
-
     return (
         <GameWrapper>
             <GameGrid>
@@ -49,11 +46,16 @@ const Game = () => {
                                 onCellClick(rawIndex, cellIndex);
                             }
 
+                            const win = combination.some(
+                                (i) => i[0] === rawIndex && i[1] === cellIndex,
+                            );
+
                             return (
                                 <GameCell
                                     key={cellIndex}
                                     cell={cell}
                                     onClick={onClick}
+                                    win={win}
                                 />
                             );
                         })}

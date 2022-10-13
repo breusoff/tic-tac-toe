@@ -1,35 +1,82 @@
 import {GameState} from "src/types/GameState";
 import {GameWinner} from "src/types/GameWinner";
 
+// todo dumb way
 const winCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
+    // horizontal
+    [
+        [0, 0],
+        [0, 1],
+        [0, 2],
+    ],
+    [
+        [1, 0],
+        [1, 1],
+        [1, 2],
+    ],
+    [
+        [2, 0],
+        [2, 1],
+        [2, 2],
+    ],
+    // vertical
+    [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+    ],
+    [
+        [0, 1],
+        [1, 1],
+        [2, 1],
+    ],
+    [
+        [0, 2],
+        [1, 2],
+        [2, 2],
+    ],
+    // diagonal
+    [
+        [0, 0],
+        [1, 1],
+        [2, 2],
+    ],
+    [
+        [0, 2],
+        [1, 1],
+        [2, 0],
+    ],
 ];
 
-const detectWinCombination = (state: GameState): GameWinner => {
-    const fState = state.flat();
+interface IWinCombination {
+    winner: GameWinner;
+    combination: number[][];
+}
 
+const detectWinCombination = (state: GameState): IWinCombination => {
     for (let i = 0; i < winCombinations.length; i += 1) {
-        const [a, b, c] = winCombinations[i];
+        const combination = winCombinations[i];
+        const [a, b, c] = combination;
 
-        const cellA = fState[a];
-        const cellB = fState[b];
-        const cellC = fState[c];
+        const cellA = state[a[0]][a[1]];
+        const cellB = state[b[0]][b[1]];
+        const cellC = state[c[0]][c[1]];
 
         if (cellA && cellA === cellB && cellA === cellC) {
-            return cellA;
+            return {
+                winner: cellA,
+                combination,
+            };
         }
     }
 
+    const fState = state.flat();
     const hasEmptyValues = fState.some((i) => i === null);
 
-    return hasEmptyValues ? null : "ties";
+    return {
+        winner: hasEmptyValues ? null : "ties",
+        combination: [],
+    };
 };
 
 export default detectWinCombination;

@@ -1,29 +1,68 @@
 /* eslint-disable react/no-array-index-key */
-import React from "react";
+import React, {useMemo, useState} from "react";
 import GameCell from "src/components/Game/GameCell";
-import {IGameCellState} from "src/components/Game/GameCell/IGameCellState";
-import {GameRaw, GameWrapper} from "./Game.styles";
+import Step from "src/components/Step";
+import detectWinCombination from "src/lib/detectWinCombination";
+import {GameState} from "src/types/GameState";
+import {GameStep} from "src/types/GameStep";
+import {GameGrid, GameRow, GameWrapper} from "./Game.styles";
 
-const state: IGameCellState[][] = [
-    ["x", null, "o"],
-    [null, "x", null],
-    ["o", null, "x"],
+const defaultState: GameState = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
 ];
 
 const Game = () => {
+    const [state, setState] = useState<GameState>(defaultState);
+    const [step, setStep] = useState<GameStep>(GameStep.x);
+
+    const {winner, combination} = useMemo(
+        () => detectWinCombination(state),
+        [state],
+    );
+
+    function toggleStep() {
+        setStep((prevState) =>
+            prevState === GameStep.x ? GameStep.o : GameStep.x,
+        );
+    }
+
+    function onCellClick(rowIndex: number, cellIndex: number) {
+        setState((prevState) => {
+            prevState[rowIndex][cellIndex] = step;
+            return [...prevState];
+        });
+        toggleStep();
+    }
+
     return (
         <GameWrapper>
-            {state.map((raw, rawIndex) => (
-                <GameRaw key={rawIndex}>
-                    {raw.map((cell, cellIndex) => (
-                        <GameCell
-                            key={cellIndex}
-                            cell={cell}
-                            win={cellIndex === 0}
-                        />
-                    ))}
-                </GameRaw>
-            ))}
+            <GameGrid>
+                {state.map((row, rowIndex) => (
+                    <GameRow key={rowIndex}>
+                        {row.map((cell, cellIndex) => {
+                            function onClick() {
+                                onCellClick(rowIndex, cellIndex);
+                            }
+
+                            const win = combination.some(
+                                (i) => i[0] === rowIndex && i[1] === cellIndex,
+                            );
+
+                            return (
+                                <GameCell
+                                    key={cellIndex}
+                                    cell={cell}
+                                    onClick={onClick}
+                                    win={win}
+                                />
+                            );
+                        })}
+                    </GameRow>
+                ))}
+            </GameGrid>
+            <Step step={step} />
         </GameWrapper>
     );
 };

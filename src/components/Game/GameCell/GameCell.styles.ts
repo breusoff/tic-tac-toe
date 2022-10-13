@@ -11,6 +11,7 @@ export const GameCellWrapper = styled.div<{
 
     border-radius: 1.6rem;
     background-color: ${(props) => props.theme.cell};
+    cursor: pointer;
 
     svg {
         width: 55.1724%;
@@ -18,6 +19,7 @@ export const GameCellWrapper = styled.div<{
 `;
 
 export const GameCellX = styled(GameCellWrapper)`
+    cursor: default;
     color: ${(props) => props.theme.cellX};
 
     ${({win, theme}) =>
@@ -29,6 +31,7 @@ export const GameCellX = styled(GameCellWrapper)`
 `;
 
 export const GameCellO = styled(GameCellWrapper)`
+    cursor: default;
     color: ${(props) => props.theme.cellO};
 
     ${({win, theme}) =>

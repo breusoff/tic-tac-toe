@@ -1,20 +1,24 @@
-import React from "react";
+import React, {FC} from "react";
 import OIcon from "src/assets/icons/OIcon";
 import XIcon from "src/assets/icons/XIcon";
-import useBooleanState from "src/hooks/useBooleanState";
-import {StepIcon, StepWrapper} from "./Step.styles";
+import StepButton from "src/components/Step/StepButton";
+import {GameStep} from "src/types/GameStep";
+import {StepWrapper} from "./Step.styles";
 
-const Step = () => {
-    const {value: xActive, setTrue, setFalse} = useBooleanState(true);
+interface IStepProps {
+    step?: GameStep;
+    onClick?: (step: GameStep) => void;
+}
 
+const Step: FC<IStepProps> = ({step = GameStep.x, onClick}) => {
     return (
         <StepWrapper>
-            <StepIcon active={xActive} onClick={setTrue}>
+            <StepButton value={GameStep.x} onClick={onClick} step={step}>
                 <XIcon />
-            </StepIcon>
-            <StepIcon active={!xActive} onClick={setFalse}>
+            </StepButton>
+            <StepButton value={GameStep.o} onClick={onClick} step={step}>
                 <OIcon />
-            </StepIcon>
+            </StepButton>
         </StepWrapper>
     );
 };

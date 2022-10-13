@@ -5,7 +5,7 @@ import Step from "src/components/Step";
 import detectWinCombination from "src/lib/detectWinCombination";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
-import {GameGrid, GameRaw, GameWrapper} from "./Game.styles";
+import {GameGrid, GameRow, GameWrapper} from "./Game.styles";
 
 const defaultState: GameState = [
     [null, null, null],
@@ -28,9 +28,9 @@ const Game = () => {
         );
     }
 
-    function onCellClick(rawIndex: number, cellIndex: number) {
+    function onCellClick(rowIndex: number, cellIndex: number) {
         setState((prevState) => {
-            prevState[rawIndex][cellIndex] = step;
+            prevState[rowIndex][cellIndex] = step;
             return [...prevState];
         });
         toggleStep();
@@ -39,15 +39,15 @@ const Game = () => {
     return (
         <GameWrapper>
             <GameGrid>
-                {state.map((raw, rawIndex) => (
-                    <GameRaw key={rawIndex}>
-                        {raw.map((cell, cellIndex) => {
+                {state.map((row, rowIndex) => (
+                    <GameRow key={rowIndex}>
+                        {row.map((cell, cellIndex) => {
                             function onClick() {
-                                onCellClick(rawIndex, cellIndex);
+                                onCellClick(rowIndex, cellIndex);
                             }
 
                             const win = combination.some(
-                                (i) => i[0] === rawIndex && i[1] === cellIndex,
+                                (i) => i[0] === rowIndex && i[1] === cellIndex,
                             );
 
                             return (
@@ -59,7 +59,7 @@ const Game = () => {
                                 />
                             );
                         })}
-                    </GameRaw>
+                    </GameRow>
                 ))}
             </GameGrid>
             <Step step={step} />

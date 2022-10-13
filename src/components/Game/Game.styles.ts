@@ -18,7 +18,7 @@ export const GameGrid = styled.div`
     gap: 1.6rem;
 `;
 
-export const GameRaw = styled.div`
+export const GameRow = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;

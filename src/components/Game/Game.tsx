@@ -2,6 +2,7 @@
 import React, {useMemo, useState} from "react";
 import GameCell from "src/components/Game/GameCell";
 import Step from "src/components/Step";
+import useWinsContext from "src/context/WinsContext";
 import detectWinCombination from "src/lib/detectWinCombination";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
@@ -16,11 +17,13 @@ const defaultState: GameState = [
 const Game = () => {
     const [state, setState] = useState<GameState>(defaultState);
     const [step, setStep] = useState<GameStep>(GameStep.x);
+    const {setWinner} = useWinsContext();
 
-    const {winner, combination} = useMemo(
-        () => detectWinCombination(state),
-        [state],
-    );
+    const {combination} = useMemo(() => {
+        const result = detectWinCombination(state);
+        setWinner(result.winner);
+        return result;
+    }, [state]);
 
     function toggleStep() {
         setStep((prevState) =>

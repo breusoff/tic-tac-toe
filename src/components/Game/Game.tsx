@@ -19,7 +19,7 @@ const Game = () => {
     const [step, setStep] = useState<GameStep>(GameStep.x);
     const {setWinner} = useWinsContext();
 
-    const {combination} = useMemo(() => {
+    const {winner, combination} = useMemo(() => {
         const result = detectWinCombination(state);
         setWinner(result.winner);
         return result;
@@ -32,6 +32,7 @@ const Game = () => {
     }
 
     function onCellClick(rowIndex: number, cellIndex: number) {
+        if (winner) return;
         setState((prevState) => {
             prevState[rowIndex][cellIndex] = step;
             return [...prevState];

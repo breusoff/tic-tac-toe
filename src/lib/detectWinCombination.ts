@@ -1,12 +1,13 @@
 import getWinCombinations from "src/lib/getWinCombinations";
 import {GameState} from "src/types/GameState";
 import {GameWinner} from "src/types/GameWinner";
+import {WinCombination} from "src/types/WinCombination";
 
 const winCombinations = getWinCombinations(3);
 
 interface IWinState {
     winner: GameWinner;
-    combination: number[][];
+    combination: WinCombination;
 }
 
 const detectWinCombination = (state: GameState): IWinState => {

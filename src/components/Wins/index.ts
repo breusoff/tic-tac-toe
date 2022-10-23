@@ -1,1 +1,1 @@
-export { default } from "./Wins";
+export {default} from "./Wins";

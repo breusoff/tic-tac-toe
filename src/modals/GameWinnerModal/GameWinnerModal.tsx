@@ -24,7 +24,7 @@ const GameWinnerModal: FC<IGameWinnerModalProps> = ({
     const {t} = useTranslation();
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen}>
             <Content>
                 <Icon winner={winner} />
                 <SwitchWrapper>

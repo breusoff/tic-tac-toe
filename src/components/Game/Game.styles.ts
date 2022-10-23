@@ -11,16 +11,3 @@ export const GameWrapper = styled.div`
         align-self: center;
     }
 `;
-
-export const GameGrid = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-`;
-
-export const GameRow = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    gap: 1.6rem;
-`;

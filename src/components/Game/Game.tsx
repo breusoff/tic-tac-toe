@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import GameCell from "src/components/Game/GameCell";
+import GameGrid from "src/components/Game/GameGrid";
 import Step from "src/components/Step";
 import useWinsContext from "src/context/WinsContext";
 import deepClone from "src/lib/deepClone";
@@ -10,7 +10,7 @@ import detectWinCombination, {
 import GameWinnerModal from "src/modals/GameWinnerModal";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
-import {GameGrid, GameRow, GameWrapper} from "./Game.styles";
+import {GameWrapper} from "./Game.styles";
 
 const defaultState: GameState = [
     [null, null, null],
@@ -55,30 +55,11 @@ const Game = () => {
 
     return (
         <GameWrapper>
-            <GameGrid>
-                {state.map((row, rowIndex) => (
-                    <GameRow key={rowIndex}>
-                        {row.map((cell, cellIndex) => {
-                            function onClick() {
-                                onCellClick(rowIndex, cellIndex);
-                            }
-
-                            const win = combination.some(
-                                (i) => i[0] === rowIndex && i[1] === cellIndex,
-                            );
-
-                            return (
-                                <GameCell
-                                    key={cellIndex}
-                                    cell={cell}
-                                    onClick={onClick}
-                                    win={win}
-                                />
-                            );
-                        })}
-                    </GameRow>
-                ))}
-            </GameGrid>
+            <GameGrid
+                state={state}
+                combination={combination}
+                onCellClick={onCellClick}
+            />
             <Step step={step} />
             <GameWinnerModal
                 isOpen={!!winner}

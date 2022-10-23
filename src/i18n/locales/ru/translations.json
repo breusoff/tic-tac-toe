@@ -17,7 +17,7 @@
                 }
             },
             "language": "Язык",
-            "animationDuration": "Продолжительность анимации",
+            "animationDuration": "Длительность анимации",
             "botComplexity": "Сложность бота"
         },
         "modals": {

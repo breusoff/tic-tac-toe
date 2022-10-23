@@ -11,11 +11,11 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
+        "prettier": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,scss}'",
+        "prepare": "husky install",
         "release-major": "standard-version --release-as major",
         "release-minor": "standard-version --release-as minor",
-        "release-patch": "standard-version --release-as patch",
-        "prettier": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,scss}'",
-        "prepare": "husky install"
+        "release-patch": "standard-version --release-as patch"
     },
     "dependencies": {
         "i18next": "21.9.2",

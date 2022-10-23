@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/tic-tac-toe/static/js/main.5738c947.js",
+    "static/media/Roboto-Bold.eot": "/tic-tac-toe/static/media/Roboto-Bold.6490694b37b0ee09bd91.eot",
+    "static/media/Roboto-Bold.ttf": "/tic-tac-toe/static/media/Roboto-Bold.5e9f6556d3c0bf6230f0.ttf",
+    "static/media/Roboto-Bold.woff": "/tic-tac-toe/static/media/Roboto-Bold.3f2cbde6b72e8d05669f.woff",
+    "index.html": "/tic-tac-toe/index.html",
+    "main.5738c947.js.map": "/tic-tac-toe/static/js/main.5738c947.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5738c947.js"
+  ]
+}

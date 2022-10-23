@@ -20,6 +20,12 @@
             "animationDuration": "Продолжительность анимации",
             "botComplexity": "Сложность бота"
         },
+        "modals": {
+            "gameWinner": {
+                "repeat": "Заново",
+                "quit": "Выйти"
+            }
+        },
         "github": "BREUSOFF"
     }
 }

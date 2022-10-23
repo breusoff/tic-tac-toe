@@ -1,9 +1,13 @@
-/* eslint-disable react/no-array-index-key */
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import GameCell from "src/components/Game/GameCell";
 import Step from "src/components/Step";
 import useWinsContext from "src/context/WinsContext";
-import detectWinCombination from "src/lib/detectWinCombination";
+import deepClone from "src/lib/deepClone";
+import detectWinCombination, {
+    IWinState,
+    defaultWinState,
+} from "src/lib/detectWinCombination";
+import GameWinnerModal from "src/modals/GameWinnerModal";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
 import {GameGrid, GameRow, GameWrapper} from "./Game.styles";
@@ -18,12 +22,8 @@ const Game = () => {
     const [state, setState] = useState<GameState>(defaultState);
     const [step, setStep] = useState<GameStep>(GameStep.x);
     const {setWinner} = useWinsContext();
-
-    const {winner, combination} = useMemo(() => {
-        const result = detectWinCombination(state);
-        setWinner(result.winner);
-        return result;
-    }, [state]);
+    const [{winner, combination}, setResult] =
+        useState<IWinState>(defaultWinState);
 
     function toggleStep() {
         setStep((prevState) =>
@@ -34,11 +34,24 @@ const Game = () => {
     function onCellClick(rowIndex: number, cellIndex: number) {
         if (winner) return;
         setState((prevState) => {
-            prevState[rowIndex][cellIndex] = step;
-            return [...prevState];
+            const copy = deepClone(prevState);
+            copy[rowIndex][cellIndex] = step;
+            return [...copy];
         });
         toggleStep();
     }
+
+    function clear() {
+        setState(defaultState);
+        setStep(GameStep.x);
+        setWinner(null);
+    }
+
+    useEffect(() => {
+        const newResult = detectWinCombination(state);
+        setWinner(newResult.winner);
+        setResult(newResult);
+    }, [state]);
 
     return (
         <GameWrapper>
@@ -67,6 +80,11 @@ const Game = () => {
                 ))}
             </GameGrid>
             <Step step={step} />
+            <GameWinnerModal
+                isOpen={!!winner}
+                winner={winner}
+                onClose={clear}
+            />
         </GameWrapper>
     );
 };

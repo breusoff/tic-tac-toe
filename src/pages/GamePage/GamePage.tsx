@@ -8,19 +8,25 @@ import {WinsContextProvider} from "src/context/WinsContext";
 import {GamePageContent} from "./GamePage.styles";
 
 const GamePage = () => {
+    return (
+        <GamePageContent>
+            <Game />
+            <Wins />
+        </GamePageContent>
+    );
+};
+
+const GamePageContainer = () => {
     const {t} = useTranslation();
 
     return (
         <WinsContextProvider>
             <Page>
                 <Header title={t("main.title")} settingsButton backButton />
-                <GamePageContent>
-                    <Game />
-                    <Wins />
-                </GamePageContent>
+                <GamePage />
             </Page>
         </WinsContextProvider>
     );
 };
 
-export default GamePage;
+export default GamePageContainer;

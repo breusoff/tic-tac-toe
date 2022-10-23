@@ -1,4 +1,5 @@
 import {createGlobalStyle, css} from "styled-components";
+import Media, {BreakPoints} from "src/styles/Media.styles";
 import RobotoEot from "src/styles/fonts/Roboto/Roboto-Bold.eot";
 import RobotoTtf from "src/styles/fonts/Roboto/Roboto-Bold.ttf";
 import RobotoWoff from "src/styles/fonts/Roboto/Roboto-Bold.woff";
@@ -42,6 +43,12 @@ const global = css`
         user-drag: none;
         -webkit-user-select: none;
         -webkit-user-drag: none;
+    }
+
+    ${Media.lessThan(BreakPoints.mobile)} {
+        html {
+            font-size: 2.338vw; // 10px
+        }
     }
 `;
 

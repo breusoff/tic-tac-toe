@@ -4,7 +4,7 @@
 
 ## Дизайн
 
-![preview.png](docs/assets/preview.png)
+![preview.png](docs/assets/preview.png?v1.0.1)
 
 ## Особенности
 

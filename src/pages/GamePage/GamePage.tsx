@@ -2,6 +2,7 @@ import React, {useMemo} from "react";
 import {useTranslation} from "react-i18next";
 import {useSearchParams} from "react-router-dom";
 import Game from "src/components/Game";
+import GameWithBot from "src/components/GameWithBot";
 import Header from "src/components/Header";
 import Page from "src/components/Page";
 import Wins from "src/components/Wins";
@@ -17,7 +18,7 @@ const GamePage = () => {
 
     return (
         <GamePageContent>
-            <Game bot={bot} />
+            {bot ? <GameWithBot /> : <Game />}
             <Wins />
         </GamePageContent>
     );

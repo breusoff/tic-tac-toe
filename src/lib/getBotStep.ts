@@ -1,3 +1,4 @@
+import {getRandomArrayElement} from "src/lib/random";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
 
@@ -7,10 +8,6 @@ interface IBotStep {
 }
 
 type BotStep = IBotStep | undefined;
-
-const getRandomArrayElement = <T>(array: T[] = []): number => {
-    return Math.floor(Math.random() * array.length);
-};
 
 const bot = {
     /**
@@ -31,8 +28,7 @@ const bot = {
 
         if (!steps.length) return undefined;
 
-        const random = getRandomArrayElement(steps);
-        return steps[random];
+        return getRandomArrayElement(steps);
     },
 };
 

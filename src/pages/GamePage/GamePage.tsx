@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {useTranslation} from "react-i18next";
+import {useSearchParams} from "react-router-dom";
 import Game from "src/components/Game";
 import Header from "src/components/Header";
 import Page from "src/components/Page";
@@ -8,9 +9,15 @@ import {WinsContextProvider} from "src/context/WinsContext";
 import {GamePageContent} from "./GamePage.styles";
 
 const GamePage = () => {
+    const [searchParams] = useSearchParams();
+    const bot = useMemo(
+        () => searchParams.get("bot") === "true",
+        [searchParams],
+    );
+
     return (
         <GamePageContent>
-            <Game />
+            <Game bot={bot} />
             <Wins />
         </GamePageContent>
     );

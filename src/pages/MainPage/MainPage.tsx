@@ -25,7 +25,7 @@ const MainPage = () => {
                     <Link to={routes.game.url()} $primary>
                         {t("main.menu.playWithFriend")}
                     </Link>
-                    <Link to={routes.game.url()}>
+                    <Link to={`${routes.game.url()}?bot=true`}>
                         {t("main.menu.playWithBot")}
                     </Link>
                 </Links>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {FC, useCallback, useEffect, useState} from "react";
 import GameGrid from "src/components/Game/GameGrid";
 import Step from "src/components/Step";
 import useWinsContext from "src/context/WinsContext";
@@ -7,6 +7,7 @@ import detectWinCombination, {
     IWinState,
     defaultWinState,
 } from "src/lib/detectWinCombination";
+import getBotStep from "src/lib/getBotStep";
 import GameWinnerModal from "src/modals/GameWinnerModal";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
@@ -18,9 +19,15 @@ const defaultState: GameState = [
     [null, null, null],
 ];
 
-const Game = () => {
+interface IGameProps {
+    bot?: boolean;
+    userStep?: GameStep;
+}
+
+const Game: FC<IGameProps> = ({bot, userStep = GameStep.x}) => {
     const [state, setState] = useState<GameState>(defaultState);
     const [step, setStep] = useState<GameStep>(GameStep.x);
+
     const {setWinner} = useWinsContext();
     const [{winner, combination}, setResult] =
         useState<IWinState>(defaultWinState);
@@ -31,14 +38,23 @@ const Game = () => {
         );
     }
 
+    const takeStep = useCallback(
+        (rowIndex: number, cellIndex: number) => {
+            setState((prevState) => {
+                const copy = deepClone(prevState);
+                copy[rowIndex][cellIndex] = step;
+                return [...copy];
+            });
+            toggleStep();
+        },
+        [step],
+    );
+
     function onCellClick(rowIndex: number, cellIndex: number) {
         if (winner) return;
-        setState((prevState) => {
-            const copy = deepClone(prevState);
-            copy[rowIndex][cellIndex] = step;
-            return [...copy];
-        });
-        toggleStep();
+        if (bot && step !== userStep) return;
+
+        takeStep(rowIndex, cellIndex);
     }
 
     function clear() {
@@ -52,6 +68,23 @@ const Game = () => {
         setWinner(newResult.winner);
         setResult(newResult);
     }, [state]);
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+
+        if (bot && step !== userStep) {
+            const botStep = getBotStep(state, step);
+            if (botStep) {
+                timeout = setTimeout(() => {
+                    takeStep(botStep.row, botStep.cell);
+                }, 300);
+            }
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [state, bot, userStep, step, takeStep]);
 
     return (
         <GameWrapper>

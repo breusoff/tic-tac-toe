@@ -1,4 +1,4 @@
-const deepClone = <T>(value: T) => {
+const deepClone = <T>(value: T): T => {
     return JSON.parse(JSON.stringify(value));
 };
 

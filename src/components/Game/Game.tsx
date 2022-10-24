@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect, useState} from "react";
+import React, {FC, useCallback, useEffect, useMemo, useState} from "react";
 import GameGrid from "src/components/Game/GameGrid";
 import Step from "src/components/Step";
 import useWinsContext from "src/context/WinsContext";
@@ -9,15 +9,9 @@ import detectWinCombination, {
 } from "src/lib/detectWinCombination";
 import getBotStep from "src/lib/getBotStep";
 import GameWinnerModal from "src/modals/GameWinnerModal";
-import {GameState} from "src/types/GameState";
+import {GameState, defaultState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
 import {GameWrapper} from "./Game.styles";
-
-const defaultState: GameState = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-];
 
 interface IGameProps {
     bot?: boolean;
@@ -27,6 +21,9 @@ interface IGameProps {
 const Game: FC<IGameProps> = ({bot, userStep = GameStep.x}) => {
     const [state, setState] = useState<GameState>(defaultState);
     const [step, setStep] = useState<GameStep>(GameStep.x);
+    const botStep = useMemo(() => {
+        return bot && step !== userStep;
+    }, [step, userStep, bot]);
 
     const {setWinner} = useWinsContext();
     const [{winner, combination}, setResult] =
@@ -51,9 +48,7 @@ const Game: FC<IGameProps> = ({bot, userStep = GameStep.x}) => {
     );
 
     function onCellClick(rowIndex: number, cellIndex: number) {
-        if (winner) return;
-        if (bot && step !== userStep) return;
-
+        if (winner || botStep) return;
         takeStep(rowIndex, cellIndex);
     }
 
@@ -72,11 +67,11 @@ const Game: FC<IGameProps> = ({bot, userStep = GameStep.x}) => {
     useEffect(() => {
         let timeout: NodeJS.Timeout;
 
-        if (bot && step !== userStep) {
-            const botStep = getBotStep(state, step);
-            if (botStep) {
+        if (botStep) {
+            const nextStep = getBotStep(state, step);
+            if (nextStep) {
                 timeout = setTimeout(() => {
-                    takeStep(botStep.row, botStep.cell);
+                    takeStep(nextStep.row, nextStep.cell);
                 }, 300);
             }
         }
@@ -84,7 +79,7 @@ const Game: FC<IGameProps> = ({bot, userStep = GameStep.x}) => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [state, bot, userStep, step, takeStep]);
+    }, [state, botStep, step, takeStep]);
 
     return (
         <GameWrapper>

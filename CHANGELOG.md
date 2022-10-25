@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/breusoff/tic-tac-toe/compare/v1.0.0...v1.0.1) (2022-10-25)
+
+
+### Features
+
+* bot ([61c3ed9](https://github.com/breusoff/tic-tac-toe/commit/61c3ed97701b2bb56a1616d095c5bdbf0848aeb9))
+* gh-pages ([5f6ffa3](https://github.com/breusoff/tic-tac-toe/commit/5f6ffa37351de624973bd1c6aec459bad4b95e85))
+
+
+### Bug Fixes
+
+* any ([01b3abe](https://github.com/breusoff/tic-tac-toe/commit/01b3abe6f28675e852037f2ff6bccb670f1e9e32))
+* bot first step ([4577ad4](https://github.com/breusoff/tic-tac-toe/commit/4577ad4498e631c9cc929f4f997f62b0d3c86a3e))
+
 ## 1.0.0 (2022-10-23)
 
 

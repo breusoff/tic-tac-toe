@@ -1,4 +1,4 @@
 export enum GameStep {
     x = "x",
-    o = "0",
+    o = "o",
 }

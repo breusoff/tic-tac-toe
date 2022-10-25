@@ -1,26 +1,33 @@
-import React from "react";
+import React, {FC} from "react";
 import Game from "src/components/Game";
 import {IGameRef} from "src/components/Game/IGameRef";
 import getBotStep from "src/lib/getBotStep";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
 
-const GameWithBot = () => {
-    const botStep = GameStep.o;
+interface IGameWithBot {
+    user?: GameStep;
+}
+
+const GameWithBot: FC<IGameWithBot> = ({user = GameStep.x}) => {
     const ref = React.useRef<IGameRef>(null);
 
     function onBeforeCellClick(step: GameStep) {
-        return step === botStep;
+        return step !== user;
     }
 
-    function onStateChange(state: GameState, step: GameStep) {
-        if (step !== botStep) return;
+    function takeBotStep(state: GameState, step: GameStep) {
         const nextStep = getBotStep(state, step);
         if (!nextStep) return;
 
         setTimeout(() => {
             ref?.current?.takeStep(nextStep.row, nextStep.cell);
         }, 500);
+    }
+
+    function onStateChange(state: GameState, step: GameStep) {
+        if (step === user) return;
+        takeBotStep(state, step);
     }
 
     return (

@@ -7,18 +7,27 @@ import Header from "src/components/Header";
 import Page from "src/components/Page";
 import Wins from "src/components/Wins";
 import {WinsContextProvider} from "src/context/WinsContext";
+import {GameStep} from "src/types/GameStep";
 import {GamePageContent} from "./GamePage.styles";
 
 const GamePage = () => {
     const [searchParams] = useSearchParams();
-    const bot = useMemo(
-        () => searchParams.get("bot") === "true",
-        [searchParams],
-    );
+    const {bot, user} = useMemo(() => {
+        function getUser() {
+            return searchParams.get("user") === GameStep.o
+                ? GameStep.o
+                : GameStep.x;
+        }
+
+        return {
+            bot: searchParams.get("bot") === "true",
+            user: getUser(),
+        };
+    }, [searchParams]);
 
     return (
         <GamePageContent>
-            {bot ? <GameWithBot /> : <Game />}
+            {bot ? <GameWithBot user={user} /> : <Game />}
             <Wins />
         </GamePageContent>
     );

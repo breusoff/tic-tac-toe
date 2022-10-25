@@ -13,6 +13,7 @@ import detectWinCombination, {
     IWinState,
     defaultWinState,
 } from "src/lib/detectWinCombination";
+import isEqual from "src/lib/isEqual";
 import GameWinnerModal from "src/modals/GameWinnerModal";
 import {GameState, defaultState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
@@ -32,42 +33,53 @@ const Game = forwardRef<IGameRef, IGameProps>(
         const [{winner, combination}, setResult] =
             useState<IWinState>(defaultWinState);
 
-        function toggleStep() {
-            setStep((prevState) =>
-                prevState === GameStep.x ? GameStep.o : GameStep.x,
-            );
+        function getNextState(rowIndex: number, cellIndex: number) {
+            const copy = deepClone(state);
+            copy[rowIndex][cellIndex] = step;
+            return [...copy];
+        }
+
+        function getNextStep(prevStep: GameStep) {
+            return prevStep === GameStep.x ? GameStep.o : GameStep.x;
         }
 
         function takeStep(rowIndex: number, cellIndex: number) {
-            setState((prevState) => {
-                const copy = deepClone(prevState);
-                copy[rowIndex][cellIndex] = step;
-                return [...copy];
-            });
-            toggleStep();
+            const nextState = getNextState(rowIndex, cellIndex);
+            const nextStep = getNextStep(step);
+
+            const newResult = detectWinCombination(nextState);
+
+            setState(nextState);
+
+            if (newResult.winner) {
+                setWinner(newResult.winner);
+                setResult(newResult);
+            } else {
+                setStep(nextStep);
+                onStateChange && onStateChange(nextState, nextStep);
+            }
         }
 
         function onCellClick(rowIndex: number, cellIndex: number) {
+            if (winner) return;
             const skipClick = onBeforeCellClick(step);
-            if (winner || skipClick) return;
+
+            if (skipClick) return;
             takeStep(rowIndex, cellIndex);
         }
 
         function clear() {
             setState(defaultState);
+            setResult(defaultWinState);
             setStep(GameStep.x);
             setWinner(null);
         }
 
         useEffect(() => {
-            const newResult = detectWinCombination(state);
-            setWinner(newResult.winner);
-            setResult(newResult);
+            if (isEqual(state, defaultState)) {
+                onStateChange && onStateChange(state, step);
+            }
         }, [state]);
-
-        useEffect(() => {
-            onStateChange && onStateChange(state, step);
-        }, [state, step, onStateChange]);
 
         useImperativeHandle(ref, () => ({
             takeStep,

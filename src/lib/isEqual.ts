@@ -1,7 +1,9 @@
+import TodoAny from "src/types/TodoAny";
+
 /**
  * Глубоко сравнивает два объекта
  */
-function isEqual(value: any, other: any): boolean {
+function isEqual(value: TodoAny, other: TodoAny): boolean {
     // Get the value type
     const type = Object.prototype.toString.call(value);
 

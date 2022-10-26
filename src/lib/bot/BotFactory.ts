@@ -1,4 +1,5 @@
 import EasyBot from "src/lib/bot/EasyBot";
+import HardBot from "src/lib/bot/HardBot";
 import MediumBot from "src/lib/bot/MediumBot";
 
 export enum BotComplexity {
@@ -15,6 +16,7 @@ class BotFactory {
             case BotComplexity.medium:
                 return new MediumBot();
             case BotComplexity.hard:
+                return new HardBot();
             default:
                 return new EasyBot();
         }

@@ -1,13 +1,7 @@
-import EasyBot, {BotStep, IBotStep} from "src/lib/bot/EasyBot";
+import EasyBot, {BotStep, IGameCellInfo} from "src/lib/bot/EasyBot";
 import isEqual from "src/lib/isEqual";
-import {GameCellState} from "src/types/GameCellState";
 import {GameState, defaultState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
-
-interface IGameCellInfo {
-    step: IBotStep;
-    value: GameCellState;
-}
 
 class MediumBot extends EasyBot {
     private shouldMakeStepOnLine(line: IGameCellInfo[]): BotStep {
@@ -34,23 +28,17 @@ class MediumBot extends EasyBot {
             return this.getRandomStep(state);
         }
 
-        for (let i = 0; i < this.winCombinations.length; i += 1) {
-            const combo = this.winCombinations[i];
+        // find better steps
+        const possibleSteps = this.matchStateWithWinCombinations(state);
+        for (let i = 0; i < possibleSteps.length; i += 1) {
+            const cell = this.shouldMakeStepOnLine(possibleSteps[i]);
 
-            const line: IGameCellInfo[] = combo.map((j) => ({
-                value: state[j[0]][j[1]],
-                step: {
-                    row: j[0],
-                    cell: j[1],
-                },
-            }));
-
-            const cell = this.shouldMakeStepOnLine(line);
             if (cell) {
                 return cell;
             }
         }
 
+        // fallback
         return this.getRandomStep(state);
     }
 }

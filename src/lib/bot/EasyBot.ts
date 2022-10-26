@@ -1,5 +1,6 @@
 import getWinCombinations from "src/lib/getWinCombinations";
 import {getRandomArrayElement} from "src/lib/random";
+import {GameCellState} from "src/types/GameCellState";
 import {GameState} from "src/types/GameState";
 
 export interface IBotStep {
@@ -9,10 +10,15 @@ export interface IBotStep {
 
 export type BotStep = IBotStep | undefined;
 
-class EasyBot {
-    winCombinations = getWinCombinations();
+export interface IGameCellInfo {
+    step: IBotStep;
+    value: GameCellState;
+}
 
-    getRandomStep(state: GameState): BotStep {
+class EasyBot {
+    protected winCombinations = getWinCombinations();
+
+    protected getRandomStep(state: GameState): BotStep {
         const steps: IBotStep[] = [];
 
         state.forEach((row, rowIndex) =>
@@ -28,6 +34,21 @@ class EasyBot {
         if (!steps.length) return undefined;
 
         return getRandomArrayElement(steps);
+    }
+
+    protected matchStateWithWinCombinations(state: GameState) {
+        return this.winCombinations.map((combo) => {
+            const line: IGameCellInfo[] = combo.map((j) => {
+                const [row, cell] = j;
+
+                return {
+                    value: state[row][cell],
+                    step: {row, cell},
+                };
+            });
+
+            return line;
+        });
     }
 
     takeStep(state: GameState): BotStep {

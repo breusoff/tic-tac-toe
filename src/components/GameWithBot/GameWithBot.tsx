@@ -1,13 +1,15 @@
 import React, {FC} from "react";
 import Game from "src/components/Game";
 import {IGameRef} from "src/components/Game/IGameRef";
-import getBotStep from "src/lib/getBotStep";
+import BotFactory, {BotComplexity} from "src/lib/bot/BotFactory";
 import {GameState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
 
 interface IGameWithBot {
     user?: GameStep;
 }
+
+const bot = new BotFactory().create(BotComplexity.medium);
 
 const GameWithBot: FC<IGameWithBot> = ({user = GameStep.x}) => {
     const ref = React.useRef<IGameRef>(null);
@@ -17,7 +19,7 @@ const GameWithBot: FC<IGameWithBot> = ({user = GameStep.x}) => {
     }
 
     function takeBotStep(state: GameState, step: GameStep) {
-        const nextStep = getBotStep(state, step);
+        const nextStep = bot.takeStep(state);
         if (!nextStep) return;
 
         setTimeout(() => {

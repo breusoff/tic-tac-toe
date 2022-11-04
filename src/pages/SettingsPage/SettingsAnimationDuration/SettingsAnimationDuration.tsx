@@ -1,14 +1,18 @@
-import React, {useState} from "react";
+import React from "react";
 import {useTranslation} from "react-i18next";
 import RabbitIcon from "src/assets/icons/range/RabbitIcon";
 import TurtleIcon from "src/assets/icons/range/TurtleIcon";
 import Card from "src/components/ui/Card";
 import SelectRange from "src/components/ui/SelectRange";
+import {
+    useAnimationDuration,
+    useSetAnimationDuration,
+} from "src/redux/entities/settings/settingsHooks";
 
 const SettingsAnimationDuration = () => {
     const {t} = useTranslation();
-
-    const [value, setValue] = useState(0);
+    const animationDuration = useAnimationDuration();
+    const setAnimationDuration = useSetAnimationDuration();
 
     return (
         <Card title={t("settings.animationDuration")}>
@@ -19,8 +23,8 @@ const SettingsAnimationDuration = () => {
                     min: 0,
                     max: 1000,
                     steps: 5,
-                    value,
-                    onChange: setValue,
+                    value: animationDuration,
+                    onChange: setAnimationDuration,
                 }}
             />
         </Card>

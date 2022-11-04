@@ -6,7 +6,6 @@ import GameWithBot from "src/components/GameWithBot";
 import Header from "src/components/Header";
 import Page from "src/components/Page";
 import Wins from "src/components/Wins";
-import {WinsContextProvider} from "src/context/WinsContext";
 import {GameStep} from "src/types/GameStep";
 import {GamePageContent} from "./GamePage.styles";
 
@@ -37,12 +36,10 @@ const GamePageContainer = () => {
     const {t} = useTranslation();
 
     return (
-        <WinsContextProvider>
-            <Page>
-                <Header title={t("main.title")} settingsButton backButton />
-                <GamePage />
-            </Page>
-        </WinsContextProvider>
+        <Page>
+            <Header title={t("main.title")} settingsButton backButton />
+            <GamePage />
+        </Page>
     );
 };
 

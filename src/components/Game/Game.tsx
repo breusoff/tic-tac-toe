@@ -7,7 +7,6 @@ import React, {
 import GameGrid from "src/components/Game/GameGrid";
 import {IGameRef} from "src/components/Game/IGameRef";
 import Step from "src/components/Step";
-import useWinsContext from "src/context/WinsContext";
 import deepClone from "src/lib/deepClone";
 import detectWinCombination, {
     IWinState,
@@ -15,6 +14,7 @@ import detectWinCombination, {
 } from "src/lib/detectWinCombination";
 import isEqual from "src/lib/isEqual";
 import GameWinnerModal from "src/modals/GameWinnerModal";
+import {useSetWinner} from "src/redux/entities/wins/winsHooks";
 import {GameState, defaultState} from "src/types/GameState";
 import {GameStep} from "src/types/GameStep";
 import {GameWrapper} from "./Game.styles";
@@ -29,7 +29,7 @@ const Game = forwardRef<IGameRef, IGameProps>(
         const [state, setState] = useState<GameState>(defaultState);
         const [step, setStep] = useState<GameStep>(GameStep.x);
 
-        const {setWinner} = useWinsContext();
+        const setWinner = useSetWinner();
         const [{winner, combination}, setResult] =
             useState<IWinState>(defaultWinState);
 

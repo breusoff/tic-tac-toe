@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/breusoff/tic-tac-toe/compare/v1.1.0...v1.2.0) (2022-11-04)
+
+
+### Features
+
+* redux toolkit ([97c3aa8](https://github.com/breusoff/tic-tac-toe/commit/97c3aa89b8195968f7672f1e36fa9c2f8eacf2ae))
+* wins redux ([8848517](https://github.com/breusoff/tic-tac-toe/commit/884851773eb45ca86c0634eb93254860fd7e82eb))
+
 ## [1.1.0](https://github.com/breusoff/tic-tac-toe/compare/v1.0.1...v1.1.0) (2022-11-04)
 
 

@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import {IWinsInfo} from "src/interfaces/IWinsInfo";
 import emptyFunction from "src/lib/emptyFunction";
-import winsStorage, {defaultWins} from "src/lib/winsStorage";
+import winsStorage, {defaultWins} from "src/lib/localStorage/winsStorage";
 import {GameWinner} from "src/types/GameWinner";
 
 interface IWinsContext {

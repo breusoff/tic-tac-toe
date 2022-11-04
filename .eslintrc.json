@@ -18,7 +18,11 @@
         "react/jsx-no-bind": 0,
         "react/require-default-props": 0,
         "no-console": ["warn", {"allow": ["warn", "error", "info"]}],
-        "no-unused-expressions": ["error", {"allowShortCircuit": true}]
+        "no-unused-expressions": ["error", {"allowShortCircuit": true}],
+        "no-param-reassign": [
+            "error",
+            {"props": true, "ignorePropertyModificationsFor": ["state"]}
+        ]
     },
     "ignorePatterns": ["*.test.js", "setupTests.ts", "react-app-env.d.ts"],
     "settings": {

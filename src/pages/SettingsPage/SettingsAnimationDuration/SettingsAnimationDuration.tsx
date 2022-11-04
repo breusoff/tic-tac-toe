@@ -7,7 +7,7 @@ import SelectRange from "src/components/ui/SelectRange";
 import {
     useAnimationDuration,
     useSetAnimationDuration,
-} from "src/redux/entities/settingsHooks";
+} from "src/redux/entities/settings/settingsHooks";
 
 const SettingsAnimationDuration = () => {
     const {t} = useTranslation();

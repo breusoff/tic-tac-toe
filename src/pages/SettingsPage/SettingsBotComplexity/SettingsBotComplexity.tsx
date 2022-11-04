@@ -7,7 +7,7 @@ import SelectRange from "src/components/ui/SelectRange";
 import {
     useBotComplexity,
     useSetBotComplexity,
-} from "src/redux/entities/settingsHooks";
+} from "src/redux/entities/settings/settingsHooks";
 
 const SettingsBotComplexity = () => {
     const {t} = useTranslation();

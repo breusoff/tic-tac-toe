@@ -1,7 +1,7 @@
 import {
     setAnimationDuration,
     setBotComplexity,
-} from "src/redux/entities/settingsSlice";
+} from "src/redux/entities/settings/settingsSlice";
 import {useAppDispatch, useAppSelector} from "src/redux/hooks";
 
 export const useSettings = () => {
